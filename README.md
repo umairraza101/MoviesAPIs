@@ -51,7 +51,6 @@ For generating document of swagger run following commands:
 
 When you fetch details about the movie, you'll want to use the Open Movie Database API, which is a RESTful web service to obtain movie information. A sample request to fetch the details for the first movie would look like:
 http://www.omdbapi.com/?apikey=[yourkey]&i=tt0232500
-You can use your API key for this exercise:
 
 ##### Note: 
 
@@ -68,5 +67,5 @@ A small cinema, which only plays movies from the Fast & Furious franchise, with 
 # Contact
 #### Your Name – Umair Raza
 
-#### Project Link: 
+#### Project Link: https://movies-api-by-umair.herokuapp.com/
 
