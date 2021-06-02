@@ -1,0 +1,382 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/auth/sign_in": {
+      "post": {
+        "summary": "Sign in user",
+        "tags": [
+          "Session"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User signed In",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth": {
+      "post": {
+        "summary": "Sign Up user",
+        "tags": [
+          "Session"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "password_confirmation",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User signed Up",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "password_confirmation": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "email",
+                "password",
+                "password_confirmation"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/movie_catalogs": {
+      "get": {
+        "summary": "get movie catalog",
+        "responses": {
+          "200": {
+            "description": "movie catalog"
+          }
+        }
+      },
+      "post": {
+        "summary": "create movie catalog",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "movie_id",
+            "in": "formdata",
+            "type": "integer"
+          },
+          {
+            "name": "movie_catalog[time]",
+            "in": "formdata",
+            "type": "datetime"
+          },
+          {
+            "name": "movie_catalog[price]",
+            "in": "formdata",
+            "type": "decimal"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "movie catalog created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "movie_catalog": {
+                  "price": {
+                    "type": "decimal"
+                  }
+                }
+              },
+              "required": [
+                "movie_id"
+              ]
+            }
+          },
+          "422": {
+            "description": "invalid request"
+          }
+        }
+      }
+    },
+    "/api/v1/movie_catalogs/{id}": {
+      "put": {
+        "summary": "update movie catalog",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "movie_catalog[time]",
+            "in": "formdata",
+            "type": "datetime"
+          },
+          {
+            "name": "movie_catalog[price]",
+            "in": "formdata",
+            "type": "decimal"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Movie Updated",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "movie_catalog": {
+                  "price": {
+                    "type": "decimal"
+                  }
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          },
+          "404": {
+            "description": "movie not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete movie",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Movie Deleted",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          },
+          "404": {
+            "description": "movie not found"
+          }
+        }
+      }
+    },
+    "/api/v1/movies/fetch_movies": {
+      "get": {
+        "summary": "get all movies",
+        "responses": {
+          "200": {
+            "description": "fetch movies"
+          }
+        }
+      }
+    },
+    "/api/v1/movies/{id}": {
+      "get": {
+        "summary": "get movie",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "movie",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/movies/{id}/rating": {
+      "post": {
+        "summary": "get movie rating",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "movie",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearerAuth": {
+      "in": "header",
+      "name": "Authorization",
+      "description": "Enter your bearer token in the format Bearer token",
+      "type": "apiKey"
+    },
+    "client": {
+      "in": "header",
+      "name": "client",
+      "description": "Enter your bearer token in the format Bearer token",
+      "type": "apiKey"
+    },
+    "uid": {
+      "in": "header",
+      "name": "uid",
+      "description": "Enter your bearer token in the format Bearer token",
+      "type": "apiKey"
+    },
+    "access-token": {
+      "in": "header",
+      "name": "access-token",
+      "description": "Enter your bearer token in the format Bearer token",
+      "type": "apiKey"
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": [
+
+      ],
+      "client": [
+
+      ],
+      "uid": [
+
+      ],
+      "access-token": [
+
+      ]
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:3000/",
+      "variables": {
+        "defaultHost": {
+          "default": "http://localhost:3000/"
+        }
+      }
+    }
+  ]
+}
